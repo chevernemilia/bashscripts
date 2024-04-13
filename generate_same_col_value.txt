@@ -1,0 +1,5 @@
+
+
+#generate a column such such name and identical value X time
+echo "ENTITY_TYPE" > entity_type.csv
+yes "registration_customer" |head -n 2000 >> entity_type.csv

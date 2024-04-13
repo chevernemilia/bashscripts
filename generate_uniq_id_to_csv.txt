@@ -1,0 +1,73 @@
+#!/bin/bash
+
+# Define the length of the random string
+length=10
+
+# Define the header for the CSV file
+header="ENTITY_ID"
+
+# Create the CSV file with the header
+echo "$header" > entity_ids.csv
+
+# Initialize an array to store generated IDs
+declare -a ids
+
+# Function to generate a random string
+generate_random_string() {
+    cat /dev/urandom | LC_ALL=C tr -dc '0-9' | fold -w $length | head -n 1
+}
+
+# Loop to generate 2000 random strings and append them to the CSV file
+for ((i=1; i<=2000; i++)); do
+    # Generate a unique random string
+    while true; do
+        random_string=$(generate_random_string)
+        if ! [[ " ${ids[@]} " =~ " $random_string " ]]; then
+            ids+=("$random_string")
+            break
+        fi
+    done
+    
+    # Append the random string to the CSV file
+    echo "$random_string" >> entity_ids.csv
+done
+
+
+#### original line ##########
+    cat /dev/urandom | LC_ALL=C tr -dc 'a-zA-Z0-9' | fold -w $length | head -n 1
+
+#############################
+
+v#!/bin/bash
+
+# Define the length of the random string
+length=10
+
+# Define the header for the CSV file
+header="EVENT_ID"
+
+# Create the CSV file with the header
+echo "$header" > event_ids.csv
+
+# Initialize an array to store generated IDs
+declare -a ids
+
+# Function to generate a random string
+generate_random_string() {
+    cat /dev/urandom | LC_ALL=C tr -dc 'a-z0-9' | fold -w $length | head -n 1
+}
+
+# Loop to generate 2000 random strings and append them to the CSV file
+for ((i=1; i<=2000; i++)); do
+    # Generate a unique random string
+    while true; do
+        random_string=$(generate_random_string)
+        if ! [[ " ${ids[@]} " =~ " $random_string " ]]; then
+            ids+=("$random_string")
+            break
+        fi
+    done
+    
+    # Append the random string to the CSV file
+    echo "$random_string" >> event_ids.csv
+done
